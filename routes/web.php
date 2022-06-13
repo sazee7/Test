@@ -20,3 +20,4 @@ Route::get('/', function () {
 Route::resource('/part1', 'Part1Controller');
 Route::resource('/part2', 'Part2Controller');
 Route::resource('/part3', 'Part3Controller');
+Route::get('/part3-2', 'Part3Controller@second');

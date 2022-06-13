@@ -14,7 +14,7 @@ class Part2Controller extends Controller
      */
     public function index()
     {
-        $scores = collect ([
+        $scores = collect([
             ['score' => 76, 'team' => 'A'],
             ['score' => 62, 'team' => 'B'],
             ['score' => 82, 'team' => 'C'],
@@ -25,13 +25,11 @@ class Part2Controller extends Controller
             ['score' => 82, 'team' => 'H'],
         ]);
 
-        $rank = $scores->sortByDesc((function ($val, $key) {
-            return $val['score'];
-        }));
-
-
-       dd($x);
-      /*   dd(collect($rank)->max()); */
+        $rank = $scores
+            ->sortByDesc((function ($val, $key) {
+                return $val['score'];
+            }));
+        return $rank;
     }
 
     /**
@@ -41,7 +39,7 @@ class Part2Controller extends Controller
      */
     public function create()
     {
-      //
+        //
     }
 
     /**

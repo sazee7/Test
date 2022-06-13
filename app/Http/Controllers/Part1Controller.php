@@ -43,19 +43,33 @@ class Part1Controller extends Controller
             ],
         ]);
 
+        /**
+         * The code below returns the employee with the most valuable sale.
+         * The collection was sorted two times one to find the employee with the most valuable sale
+         * and one to sort the sales in descending order bringing the highest sale on the top.
+         *
+         * $arr was declared in order to show the final result in a cleaner way.
+         *
+         */
         $high_sale = $employees->map(function ($emp, $key) {
-            $emp['sales'] = collect($emp['sales'])->sortByDesc((function ($sales, $key) {
-                return $sales['order_total'];
-            }));
+            $emp['sales'] = collect($emp['sales'])
+            ->sortByDesc((function ($sales, $key) {
+                    return $sales['order_total'];
+                }));
             return $emp;
-        })->sortByDesc(function ($emp, $key) {
-            return $emp['sales']->max('order_total');
-        });
+        })
+            ->sortByDesc(function ($emp, $key) {
+                return $emp['sales']->max('order_total');
+            });
 
-     $high_sale= $high_sale->first();
+        $high_sale = $high_sale->first();
 
 
-dd($high_sale);
+        $arr = [
+            "Customer Name" => $high_sale['name'],
+            "Valuable Sales" => $high_sale['sales']
+        ];
+        return $arr;
     }
 
     /**
